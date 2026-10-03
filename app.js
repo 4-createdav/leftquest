@@ -50,7 +50,7 @@ function renderStatus(r) {
       (pc == null ? '' : `<div class="xp-bar"><div class="xp-fill" style="width:${pc}%"></div></div>`) + '</div>';
   }).join('');
   const cls = r.online ? 'on' : 'off', word = r.online ? 'Online' : 'Offline';
-  el.innerHTML = `<div class="srv-head ${cls}"><span class="dot ${cls}"></span><b>${word}</b><span class="dim">Updated ${new Date().toLocaleTimeString()}</span></div><div class="tiles">${tiles}</div>`;
+  el.innerHTML = `<div class="srv-head ${cls}"><span class="dot ${cls}"></span><b>${word}</b><span class="dim">Updated ${new Date().toLocaleTimeString()}${r.via ? ' · via ' + esc(r.via) : ''}</span></div><div class="tiles">${tiles}</div>`;
   setBox(`<span class="dot ${cls}"></span>${word}`);
 }
 
