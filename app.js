@@ -38,8 +38,8 @@ const setBox = t => { const b = $('#box-status'); if (b) b.innerHTML = t; };
 
 function renderStatus(r) {
   const el = $('#status');
-  if (!r.configured) { el.innerHTML = '<p class="dim">Live status isn\'t set up yet.</p>'; return setBox('Status not set up'); }
-  if (r.error) { el.innerHTML = '<p class="dim">Status unavailable right now. Try again soon.</p>'; return setBox('Status unavailable'); }
+  if (!r.configured) { el.innerHTML = '<p class="dim">Live status isn\'t set up yet' + (r.missing ? ' (missing: ' + esc(r.missing.join(', ')) + ')' : '') + '.</p>'; return setBox('Status not set up'); }
+  if (r.error) { el.innerHTML = '<p class="dim">Status unavailable' + (r.reason ? ': ' + esc(r.reason) : '') + '</p>'; return setBox('Status unavailable'); }
   const d = r.data || {}, order = Object.keys(LABELS);
   const keys = [...order.filter(k => k in d), ...Object.keys(d).filter(k => !order.includes(k))]
     .filter(k => d[k] !== null && typeof d[k] !== 'object');
@@ -55,8 +55,12 @@ function renderStatus(r) {
 }
 
 async function loadStatus() {
-  try { renderStatus(await (await fetch('/.netlify/functions/server-status')).json()); }
-  catch (e) { renderStatus({ configured: true, error: true }); }
+  try {
+    const res = await fetch('/.netlify/functions/server-status');
+    if (!res.ok || !(res.headers.get('content-type') || '').includes('json'))
+      return renderStatus({ configured: true, error: true, reason: `status function not found (HTTP ${res.status}). Check the Netlify deploy log.` });
+    renderStatus(await res.json());
+  } catch (e) { renderStatus({ configured: true, error: true, reason: 'network error' }); }
 }
 setInterval(() => { if (location.hash.startsWith('#/games')) loadStatus(); }, 60000);
 
