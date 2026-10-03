@@ -1,0 +1,9 @@
+{
+  "name": "the-vault",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Minecraft members portal with a Decap CMS admin, deployed on Netlify.",
+  "scripts": {
+    "build": "node build.js"
+  }
+}

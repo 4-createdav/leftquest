@@ -1,0 +1,14 @@
+{
+  "intro": "A hub for our game servers. Open Games to see live server status.",
+  "discord_invite": "",
+  "highlights": [
+    {
+      "title": "Live status",
+      "text": "See if the server is up, plus CPU, RAM and disk."
+    },
+    {
+      "title": "Always updating",
+      "text": "Stats refresh automatically every minute."
+    }
+  ]
+}

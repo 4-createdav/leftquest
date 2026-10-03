@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>THE VAULT - Minecraft members portal</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#/home">THE<span>VAULT</span></a>
+    <nav class="nav">
+      <a href="#/home" data-nav="home">Home</a>
+      <a href="#/games/minecraft" data-nav="games">Games</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section id="home" class="page">
+  <div class="hero">
+    <div class="hero-text">
+      <h1 class="glitch" data-text="Your block. Your server.">Your block. Your server.</h1>
+      <p><span id="intro-text">A hub for our game servers.</span><span class="cursor">_</span></p>
+      <div class="actions"><a class="btn" href="#/games/minecraft">Go to Games</a><a class="btn alt" id="discord" target="_blank" rel="noopener noreferrer" hidden>Join our Discord</a></div>
+    </div>
+    <div class="stage" aria-hidden="true">
+      <div class="bob"><div class="cube">
+        <i class="f front"></i><i class="f back"></i><i class="f left"></i><i class="f right"></i><i class="f top"></i><i class="f bottom"></i>
+      </div></div>
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="home-sec" id="hl-wrap" hidden><h2>Highlights</h2><div class="cards" id="highlights"></div></div>
+</section>
+
+<section id="games" class="page">
+  <div class="wrap">
+    <div class="subnav">
+      <a class="tab" data-sub="all" href="#/games">All games</a>
+      <a class="tab" data-sub="minecraft" href="#/games/minecraft">Minecraft</a>
+      <span class="tab off" title="Add more games later">More soon</span>
+    </div>
+    <div id="panel-all" class="panel">
+      <div class="game-grid">
+        <a class="game-box" href="#/games/minecraft">
+          <i class="mini"></i>
+          <div><h3>Minecraft</h3><p id="box-status" class="dim">Server status</p></div>
+          <span class="go">Open ▸</span>
+        </a>
+      </div>
+    </div>
+    <div id="panel-minecraft" class="panel">
+      <h2 class="page-title" id="mc-title">Minecraft</h2>
+      <p class="dim" id="mc-desc"></p>
+      <div id="status"><p class="dim">Loading status…</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">Content managed via <a href="/admin">/admin</a></footer>
+
+
+<script src="app.js"></script>
+<!-- Sends Netlify Identity invite/reset links to /admin to finish login. -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", () => {
+      document.location.hash.match(/invite_token|recovery_token/) &&
+        (document.location.href = "/admin" + document.location.hash);
+    });
+  }
+</script>
+</body>
+</html>
